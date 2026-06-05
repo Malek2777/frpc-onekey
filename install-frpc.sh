@@ -11,6 +11,7 @@ export FRPC_INIT="https://raw.githubusercontent.com/Malek2777/frpc-onekey/main/f
 export github_download_url="https://github.com/fatedier/frp/releases/download"
 export github_latest_version_api="https://api.github.com/repos/fatedier/frp/releases/latest"
 export $(grep -v '^#' .env | xargs -0)
+export env=$(grep -v '^#' .my_env | xargs -0)
 # Program information
 program_name="frpc"
 version="1.0.0"
@@ -180,6 +181,13 @@ check_os_bit() {
         riscv64)     Is_64bit='y'; ARCHS="riscv64";;
         *)           echo "Unknown architecture";;
     esac
+}
+# Disable selinux
+disable_selinux(){
+    if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
+        sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+        setenforce 0
+    fi
 }
 pre_install_packs(){
     local wget_flag=''
@@ -411,6 +419,7 @@ pre_install_frpc(){
     fun_frpc
     echo -e "Check your client setting, please wait..."
 	echo ""
+    disable_selinux
 
     # Check if the frpc service is already running
     if pgrep -x "${program_name}" >/dev/null; then
@@ -582,24 +591,7 @@ webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
-
-[[proxies]]
-name = "ha"
-type = "http"
-localIP = "192.168.0.120"
-localPort = 8123
-customDomains = ["ha.10002777.xyz"]
-
-[[proxies]]
-name = "pve"
-type = "https"
-localIP = "192.168.0.103"
-localPort = 8006
-customDomains = ["pve.10002777.xyz"]
-
-[proxies.plugin]
-type = "https2http"
-hostHeaderRewrite = "pve.10002777.xyz"
+${env}
 
 EOF
     echo " done"
