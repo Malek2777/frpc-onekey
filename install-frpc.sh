@@ -10,13 +10,14 @@ export FRPC_VER_32BIT="$LATEST_RELEASE"
 export FRPC_INIT="https://raw.githubusercontent.com/Malek2777/frpc-onekey/main/frpc.init"
 export github_download_url="https://github.com/fatedier/frp/releases/download"
 export github_latest_version_api="https://api.github.com/repos/fatedier/frp/releases/latest"
-
+export $(grep -v '^#' .env | xargs -0)
 # Program information
 program_name="frpc"
 version="1.0.0"
 str_program_dir="/usr/local/${program_name}"
 program_init="/etc/init.d/${program_name}"
 program_config_file="frpc.toml"
+env="frpc.toml"
 ver_file="/tmp/.frp_ver.sh"
 str_install_shell="https://raw.githubusercontent.com/Malek2777/frpc-onekey/main/install-frpc.sh"
 
@@ -392,6 +393,7 @@ fun_input_dashboard_user(){
 }
 fun_input_dashboard_pwd(){
     def_dashboard_pwd=`fun_randstr 8`
+    [ -n "${DASHBOARD_PWD}" ] && def_dashboard_pwd=${DASHBOARD_PWD}
     echo ""
     echo -n -e "Please input ${program_name} ${COLOR_GREEN}dashboard_pwd${COLOR_END}"
     read -e -p "(Default : ${def_dashboard_pwd}):" input_dashboard_pwd
@@ -399,6 +401,7 @@ fun_input_dashboard_pwd(){
 }
 fun_input_token(){
     def_token=`fun_randstr 16`
+    [ -n "${TOKEN}" ] && def_token=${TOKEN}
     echo ""
     echo -n -e "Please input ${program_name} ${COLOR_GREEN}token${COLOR_END}"
     read -e -p "(Default : ${def_token}):" input_token
@@ -407,6 +410,7 @@ fun_input_token(){
 fun_input_host(){
     def_host=$(ip a | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d'/' -f1 | head -n 1)
     echo ""
+    [ -n "${SERVER_ADDR}" ] && def_host=${SERVER_ADDR}
     echo -n -e "Please input ${program_name} ${COLOR_GREEN}host${COLOR_END}"
     read -e -p "(Default : ${def_host}):" input_host
     [ -z "${input_host}" ] && input_host="${def_host}"
