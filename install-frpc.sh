@@ -629,7 +629,8 @@ EOF
 
 	# Start the frpc service
 	${program_init} start
-
+echo " Start the frpc service"
+echo "program_init= ${program_init}"
 	# Check if the frpc service started successfully
 	if pgrep -x "${program_name}" >/dev/null; then
 		echo "${program_name} service started successfully."
