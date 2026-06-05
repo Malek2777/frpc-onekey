@@ -686,7 +686,7 @@ fi
 ############################### configure ##################################
 configure_program_server_frpc(){
     if [ -s ${str_program_dir}/${program_config_file} ]; then
-        vi ${str_program_dir}/${program_config_file}
+        nano ${str_program_dir}/${program_config_file}
     else
         echo "${program_name} configuration file not found!"
         exit 1
