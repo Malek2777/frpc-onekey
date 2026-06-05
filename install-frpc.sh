@@ -428,7 +428,7 @@ fun_input_token(){
     [ -z "${input_token}" ] && input_token="${def_token}"
 }
 fun_input_host(){
-    def_host=${defIP}
+    def_host=$(ip a | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d'/' -f1 | head -n 1)
     echo ""
     echo -n -e "Please input ${program_name} ${COLOR_GREEN}host${COLOR_END}"
     read -e -p "(Default : ${def_host}):" input_host
@@ -596,7 +596,7 @@ serverAddr = "${set_host}"
 serverPort = ${set_bind_port}
 
 # console or real logFile path like ./frpc.log
-log.to = "${str_log_file_flag}"
+log.to = "${str_log_file}"
 # trace, debug, info, warn, error
 log.level = "${str_log_level}"
 log.maxDays = "${set_log_max_days}"
