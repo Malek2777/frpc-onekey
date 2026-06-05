@@ -592,7 +592,12 @@ webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
 ${env}
-
+[[proxies]]
+name = "ha-tcp"
+type = "tcp"
+localIP = "192.168.0.120"
+localPort = 8123
+remotePort = 8123
 EOF
     echo " done"
 
