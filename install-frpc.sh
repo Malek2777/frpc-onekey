@@ -17,7 +17,6 @@ version="1.0.0"
 str_program_dir="/usr/local/${program_name}"
 program_init="/etc/init.d/${program_name}"
 program_config_file="frpc.toml"
-env="frpc.toml"
 ver_file="/tmp/.frp_ver.sh"
 str_install_shell="https://raw.githubusercontent.com/Malek2777/frpc-onekey/main/install-frpc.sh"
 
@@ -584,12 +583,25 @@ webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
 
+[[proxies]]
+name = "ha"
+type = "http"
+localIP = "192.168.0.120"
+localPort = 8123
+customDomains = ["ha.10002777.xyz"]
+
+[[proxies]]
+name = "pve"
+type = "https"
+localIP = "192.168.0.103"
+localPort = 8006
+customDomains = ["pve.10002777.xyz"]
+
+[proxies.plugin]
+type = "https2http"
+hostHeaderRewrite = "pve.10002777.xyz"
 
 EOF
-cat << EOF >> "${str_program_dir}/${program_config_file}"
-$(grep -v '^#' /opt/.my_env | xargs -0) 
-EOF
-    echo " ${str_program_dir}/${program_config_file}"
     echo " done"
 
 	echo -n "download ${program_name} ..."
