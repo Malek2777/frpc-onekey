@@ -445,7 +445,7 @@ else
         fun_getVer
         echo -e ""
         echo -e "Loading You Client IP, please wait..."
-        defIP=$(curl -s https://api.ipify.org)
+        defIP=$(ip a | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d'/' -f1 | head -n 1)
         echo -e "You Client IP:${COLOR_GREEN}${defIP}${COLOR_END}"
         echo -e ""
         echo -e "————————————————————————————————————————————"

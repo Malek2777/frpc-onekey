@@ -35,7 +35,7 @@ fun_frpc()
 {
     echo ""
     echo "+---------------------------------------------------------+"
-    echo "|     Manager for ${ProgramName}, Author Clang, Mender MvsCode      |"
+    echo "|     Manager for ${ProgramName} |"
     echo "+---------------------------------------------------------+"
     echo ""
 }
