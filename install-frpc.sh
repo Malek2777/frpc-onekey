@@ -586,7 +586,10 @@ webServer.password = "${set_dashboard_pwd}"
 
 
 EOF
-    echo $(grep -v '^#' /opt/.my_env | xargs -0) >> "${str_program_dir}/${program_config_file}"
+cat << EOF >> "${str_program_dir}/${program_config_file}"
+$(grep -v '^#' /opt/.my_env | xargs -0) 
+EOF
+    echo " ${str_program_dir}/${program_config_file}"
     echo " done"
 
 	echo -n "download ${program_name} ..."
