@@ -8,9 +8,7 @@ export PATH
 export FRPC_VER="$LATEST_RELEASE"
 export FRPC_VER_32BIT="$LATEST_RELEASE"
 export FRPC_INIT="https://raw.githubusercontent.com/Malek2777/frpc-onekey/main/frpc.init"
-export gitee_download_url="https://gitee.com/mvscode/frpc-onekey/releases/download"
 export github_download_url="https://github.com/fatedier/frp/releases/download"
-export gitee_latest_version_api="https://gitee.com/api/v5/repos/mvscode/frpc-onekey/releases/latest"
 export github_latest_version_api="https://api.github.com/repos/fatedier/frp/releases/latest"
 
 # Program information
@@ -217,31 +215,9 @@ fun_randstr(){
     echo ${strRandomPass}
 }
 fun_getServer(){
-    def_server_url="github"
-    echo ""
-    echo -e "Please select ${COLOR_PINK}${program_name} download${COLOR_END} url:"
-    echo -e "[1].gitee"
-    echo -e "[2].github (default)"
-    read -e -p "Enter your choice (1, 2 or exit. default [${def_server_url}]): " set_server_url
-    [ -z "${set_server_url}" ] && set_server_url="${def_server_url}"
-    case "${set_server_url}" in
-        1|[Ga][Ii][Tt][Ee][Ee])
-            program_download_url=${gitee_download_url};
-            choice=1
-            ;;
-        2|[Gg][Ii][Tt][Hh][Uu][Bb])
-            program_download_url=${github_download_url};
-            choice=2
-            ;;
-        [eE][xX][iI][tT])
-            exit 1
-            ;;
-        *)
-            program_download_url=${github_download_url}
-            ;;
-    esac
+    program_download_url=${github_download_url}
     echo    "-----------------------------------"
-    echo -e "       Your select: ${COLOR_YELOW}${set_server_url}${COLOR_END}    "
+    echo -e "       Your select: ${COLOR_YELOW}${program_download_url}${COLOR_END}    "
     echo    "-----------------------------------"
 }
 fun_getVer(){
@@ -555,10 +531,9 @@ else
                 ;;
             *)
                 str_log_file="./frpc.log"
-                str_log_file_flag="enable"
                 ;;
         esac
-        echo -e "log_file: ${COLOR_YELOW}${str_log_file_flag}${COLOR_END}"
+        echo -e "log_file: ${COLOR_YELOW}${str_log_file}${COLOR_END}"
         echo -e ""
         echo "-------------------------"  
 
@@ -571,7 +546,7 @@ else
         echo -e "token              : ${COLOR_GREEN}${set_token}${COLOR_END}"
         echo -e "Log level          : ${COLOR_GREEN}${str_log_level}${COLOR_END}"
         echo -e "Log max days       : ${COLOR_GREEN}${set_log_max_days}${COLOR_END}"
-        echo -e "Log file           : ${COLOR_GREEN}${str_log_file_flag}${COLOR_END}"
+        echo -e "Log file           : ${COLOR_GREEN}${str_log_file}${COLOR_END}"
         echo "=============================================="
         echo ""
         echo "Press any key to start...or Press Ctrl+c to cancel"
@@ -694,7 +669,7 @@ fi
     echo -e "host               : ${COLOR_GREEN}${set_host}${COLOR_END}"
     echo -e "Log level          : ${COLOR_GREEN}${str_log_level}${COLOR_END}"
     echo -e "Log max days       : ${COLOR_GREEN}${set_log_max_days}${COLOR_END}"
-    echo -e "Log file           : ${COLOR_GREEN}${str_log_file_flag}${COLOR_END}"
+    echo -e "Log file           : ${COLOR_GREEN}${str_log_file}${COLOR_END}"
     echo "================================================"
     echo -e "${program_name} Dashboard     : ${COLOR_GREEN}http://${defIP}:${set_dashboard_port}/${COLOR_END}"
     echo -e "Dashboard port     : ${COLOR_GREEN}${set_dashboard_port}${COLOR_END}"
