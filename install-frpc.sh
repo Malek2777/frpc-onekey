@@ -590,7 +590,24 @@ webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
-$(grep -v '^#' .my_env | xargs -0)
+
+[[proxies]]
+name = "ha"
+type = "http"
+localIP = "192.168.0.120"
+localPort = 8123
+customDomains = ["ha.10002777.xyz"]
+
+[[proxies]]
+name = "pve"
+type = "https"
+localPort = 8006
+customDomains = ["pve.10002777.xyz"]
+
+[proxies.plugin]
+type = "https2http"
+localAddr = "192.168.0.103:8006"
+hostHeaderRewrite = "pve.10002777.xyz"
 
 EOF
     echo " done"
