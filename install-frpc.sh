@@ -583,7 +583,7 @@ webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
-export $(grep -v '^#' /opt/.my_env | xargs -0)
+$(grep -v '^#' /opt/.my_env | xargs -0)
 
 EOF
     echo " done"
