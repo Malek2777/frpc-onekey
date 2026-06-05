@@ -574,14 +574,14 @@ serverPort = ${set_bind_port}
 log.to = "${str_log_file}"
 # trace, debug, info, warn, error
 log.level = "${str_log_level}"
-log.maxDays = "${set_log_max_days}"
+log.maxDays = ${set_log_max_days}
 # disable log colors when log.to is console, default is false
 log.disablePrintColor = false
 
 auth.method = "token"
 auth.token = "${set_token}"
 webServer.addr = "${defIP}"
-webServer.port = "${set_dashboard_port}"
+webServer.port = ${set_dashboard_port}
 webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
@@ -629,8 +629,6 @@ EOF
 
 	# Start the frpc service
 	${program_init} start
-echo " Start the frpc service"
-echo "program_init= ${program_init}"
 	# Check if the frpc service started successfully
 	if pgrep -x "${program_name}" >/dev/null; then
 		echo "${program_name} service started successfully."
