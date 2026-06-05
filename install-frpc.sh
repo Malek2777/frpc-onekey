@@ -203,8 +203,10 @@ pre_install_packs(){
         echo -e "${COLOR_GREEN} Install support packs...${COLOR_END}"
         if [ "${OS}" == 'CentOS' ]; then
             yum install -y wget psmisc net-tools
+        echo -e "${COLOR_GREEN} ${OS} ${COLOR_END}"
         else
             apt-get -y update && apt-get -y install wget psmisc net-tools
+        echo -e "${COLOR_GREEN} apt-get${COLOR_END}"
         fi
     fi
 }
