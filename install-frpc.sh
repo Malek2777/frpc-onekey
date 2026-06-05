@@ -590,7 +590,6 @@ webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
-
 [[proxies]]
 name = "ha"
 type = "http"
@@ -610,6 +609,8 @@ localAddr = "192.168.0.103:8006"
 hostHeaderRewrite = "pve.10002777.xyz"
 
 EOF
+#$(grep -v '^#' .my_env | xargs -0)
+#
     echo " done"
 
 	echo -n "download ${program_name} ..."
