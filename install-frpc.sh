@@ -593,13 +593,8 @@ webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
+export $(grep -v '^#' .my_env | xargs -0)
 
-[[proxies]]
-name = "tcp-service"
-type = "tcp"
-localIp = "127.0.0.1"
-localPort = 22
-remotePort = 6000
 EOF
     echo " done"
 
