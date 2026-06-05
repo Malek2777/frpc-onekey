@@ -583,9 +583,10 @@ webServer.user = "${set_dashboard_user}"
 webServer.password = "${set_dashboard_pwd}"
 # Admin assets directory. By default, these assets are bundled with frpc.
 # webServer.assetsDir = "./static"
-$(grep -v '^#' /opt/.my_env | xargs -0)
+
 
 EOF
+    echo $(grep -v '^#' /opt/.my_env | xargs -0) >> "${str_program_dir}/${program_config_file}"
     echo " done"
 
 	echo -n "download ${program_name} ..."
