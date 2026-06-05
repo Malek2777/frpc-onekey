@@ -129,7 +129,7 @@ checkos(){
 }
 fun_config(){
     if [ -s ${CONFIGFILE} ]; then
-        vi ${CONFIGFILE}
+        nano ${CONFIGFILE}
     else
         echo "${ProgramName} configuration file not found!"
         return 1
