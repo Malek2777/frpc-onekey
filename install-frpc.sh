@@ -595,14 +595,12 @@ name = "ha"
 type = "http"
 localIP = "192.168.0.120"
 localPort = 8123
-customDomains = ["ha.10002777.xyz"]
-
+subdomain = "ha"
 [[proxies]]
 name = "pve"
 type = "https"
 localPort = 8006
-customDomains = ["pve.10002777.xyz"]
-
+subdomain = "pve"
 [proxies.plugin]
 type = "https2http"
 localAddr = "192.168.0.103:8006"
