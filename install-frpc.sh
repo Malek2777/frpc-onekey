@@ -615,9 +615,9 @@ webServer.password = "${set_dashboard_pwd}"
 [[proxies]]
 name = "tcp-service"
 type = "tcp"
-localIP = "${LOCAL_IP}"
-localPort = ${LOCAL_PORT}
-remotePort = ${REMOTE_PORT}
+localIp = "127.0.0.1"
+localPort = 22
+remotePort = 6000
 EOF
     echo " done"
 
