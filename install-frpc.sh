@@ -182,13 +182,6 @@ check_os_bit() {
         *)           echo "Unknown architecture";;
     esac
 }
-# Disable selinux
-disable_selinux(){
-    if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
-        sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
-        setenforce 0
-    fi
-}
 pre_install_packs(){
     local wget_flag=''
     local killall_flag=''
@@ -203,10 +196,8 @@ pre_install_packs(){
         echo -e "${COLOR_GREEN} Install support packs...${COLOR_END}"
         if [ "${OS}" == 'CentOS' ]; then
             yum install -y wget psmisc net-tools
-        echo -e "${COLOR_GREEN} ${OS} ${COLOR_END}"
         else
             apt-get -y update && apt-get -y install wget psmisc net-tools
-        echo -e "${COLOR_GREEN} apt-get${COLOR_END}"
         fi
     fi
 }
@@ -421,7 +412,6 @@ pre_install_frpc(){
     fun_frpc
     echo -e "Check your client setting, please wait..."
 	echo ""
-    disable_selinux
 
     # Check if the frpc service is already running
     if pgrep -x "${program_name}" >/dev/null; then
