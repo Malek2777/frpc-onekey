@@ -23,7 +23,7 @@ str_install_shell="https://raw.githubusercontent.com/Malek2777/frpc-onekey/main/
 # Function to check for shell updates
 shell_update() {
     # Clear the terminal
-    fun_frpc "clear"
+    #fun_frpc "clear"
 
     # Echo a message to indicate that we're checking for shell updates
     echo "Checking for shell updates..."
@@ -79,7 +79,7 @@ fun_frpc(){
     fi
     echo ""
     echo "+------------------------------------------------------------+"
-    echo "|    frpc for Linux Server, Author Clang, Mender MvsCode     |" 
+    echo "|    frpc for Linux Server   |" 
     echo "|      A tool to auto-compile & install frpc on Linux        |"
     echo "+------------------------------------------------------------+"
     echo ""
@@ -131,6 +131,7 @@ checkos(){
         echo "Unsupported OS. Please use a supported Linux distribution and retry!"
         exit 1
     fi
+    echo "${OS}"
 }
 # Get version
 getversion(){
